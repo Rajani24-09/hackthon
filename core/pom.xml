@@ -162,8 +162,10 @@ Import-Package: javax.annotation;version=0.0.0,*
         </dependency>
         <dependency>
             <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.models.api</artifactId>
+            <artifactId>org.apache.sling.api</artifactId>
+            <scope>provided</scope>
         </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
@@ -178,10 +180,13 @@ Import-Package: javax.annotation;version=0.0.0,*
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.api</artifactId>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
         </dependency>
+
+
 
 
         <!-- Testing -->
@@ -227,9 +232,6 @@ Import-Package: javax.annotation;version=0.0.0,*
             <version>1.4.4</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
+
     </dependencies>
 </project>

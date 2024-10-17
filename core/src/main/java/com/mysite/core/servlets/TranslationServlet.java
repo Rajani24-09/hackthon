@@ -39,6 +39,9 @@ public class TranslationServlet extends SlingSafeMethodsServlet {
     private static final Logger LOGGER = Logger.getLogger(TranslationServlet.class.getName());
 
     private static final String CHATGPT_API_ENDPOINT = "https://api.openai.com/v1/chat/completions";
+    private static final String PS_CHAT_API_URL = "https://api.psnext.info/api/chat";
+    private static final String API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJpZCI6MjM3OTMsInJvbGVzIjpbImRlZmF1bHQiXSwicGF0aWQiOiIzNjIzYjc3Zi1hZTllLTRiYzEtOWY0NC04YzMyNmI0YTZlNTcifSwiaWF0IjoxNzI5MTAyNTU4LCJleHAiOjE3MzE2OTQ1NTh9.k3gln60yE5gAQ9eqUvuf2h1RdQHt271huwrSUAzPZAk";
+
 
     private static final HttpClient client = HttpClients.createDefault();
     private static final ObjectMapper MAPPER = new ObjectMapper();
@@ -54,8 +57,8 @@ public class TranslationServlet extends SlingSafeMethodsServlet {
 
         // Generate the chat message using ChatGPT API
         String requestBody = MAPPER.writeValueAsString(new TranslationRequest(prompt,"gpt-3.5-turbo","user"));
-        HttpPost request = new HttpPost(CHATGPT_API_ENDPOINT);
-        request.addHeader("Authorization", "Bearer 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");
+        HttpPost request = new HttpPost(PS_CHAT_API_URL);
+        request.addHeader("Authorization", "Bearer "+API_KEY);
         request.addHeader("Content-Type", "application/json");
         request.setEntity(new StringEntity(requestBody));
         System.out.println("requestBody: "+requestBody);
