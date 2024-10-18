@@ -30,27 +30,27 @@
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/coral/foundation/form/select/option"
                                 text="English (US)"
-                                value="en-US"/>
+                                value="English (US)"/>
                             <enGB
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/coral/foundation/form/select/option"
                                 text="English (UK)"
-                                value="en-GB"/>
+                                value="English (UK)"/>
                             <frFR
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/coral/foundation/form/select/option"
                                 text="French (France)"
-                                value="fr-FR"/>
+                                value="French (France)"/>
                             <deDE
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/coral/foundation/form/select/option"
                                 text="German (Germany)"
-                                value="de-DE"/>
+                                value="German (Germany)"/>
                             <esES
                                 jcr:primaryType="nt:unstructured"
                                 sling:resourceType="granite/ui/components/coral/foundation/form/select/option"
                                 text="Spanish (Spain)"
-                                value="es-ES"/>
+                                value="Spanish (Spain)"/>
                         </items>
                     </localeDropdown>
                     <generateButton

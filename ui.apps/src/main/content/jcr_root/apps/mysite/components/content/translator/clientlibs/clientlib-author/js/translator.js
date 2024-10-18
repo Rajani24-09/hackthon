@@ -17,10 +17,8 @@
             })
             .then(data => {
                 $(outputTextField).val(data);
-                alert('Success: ' + data);
             })
             .catch(error => {
-                alert('Error occurred: ' + error.message);
             });
         });
     });

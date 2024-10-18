@@ -1,1 +1,29 @@
-${properties.translatedText}
+<sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"/>
+<sly data-sly-test.text="${properties.translatedText}">
+    <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
+         data-sly-call="${clientlib.all @ categories='translator.component.dialog.clientlibs'}"/>
+    <h2 class="translation-heading">Translations with GenAI</h2>
+    <div class="translation-container">
+
+        <!-- Input text column -->
+        <div class="column">
+            <label for="inputText">Input Text:</label>
+            <textarea id="inputText" class="input-text" name="inputText" rows="4" cols="50">${properties.prompt}</textarea>
+        </div>
+
+        <!-- Translated text column -->
+        <div class="column">
+            <label for="outputText">Translated Text:</label>
+            <textarea id="outputText" class="output-text" name="outputText" rows="4" cols="50" readonly>${properties.translatedText}</textarea>
+
+            <!-- Language Information -->
+            <div class="language-info">
+                <label for="translatedTo">Translated To:</label>
+                <span id="translatedTo" class="translated-language">${properties.locale}</span>
+            </div>
+        </div>
+    </div>
+</sly>
+
+<sly data-sly-call="${templates.placeholder @ isEmpty = !text}"></sly>
+
