@@ -1,0 +1,22 @@
+<div class="chatgpt-integration">
+    <h2>AEM ChatGPT Integration</h2>
+    
+    <div class="prompt-input">
+        <p><strong>Prompt:</strong> ${properties.prompt}</p>
+        <textarea id="chatgptPrompt">${properties.prompt}</textarea>       
+    </div>
+
+
+    <div class="locale-input">
+        <p><strong>Locale:</strong></p>
+        <p id="chatgptLocale">${properties.locale}</p>
+    </div>
+
+   <button id="generateBtn">Generate Content</button>
+    
+    <div class="generated-output">
+        <h3>Generated Content:</h3>
+        <p id="chatgptOutput">Waiting for content...</p>
+    </div>
+
+</div>
