@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:granite="http://www.adobe.com/jcr/granite/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Properties"
+    sling:resourceType="cq/gui/components/authoring/dialog"
+    extraClientlibs="[translator.component.dialog.clientlibs]">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+        <items jcr:primaryType="nt:unstructured">
+            <column
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <inputText
+                        granite:class="input-field"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+                        fieldLabel="Enter Text"
+                        name="./prompt"/>
+                    <localeDropdown
+                        granite:class="locale"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/select"
+                        allowBlank="{Boolean}false"
+                        fieldLabel="Select Locale"
+                        name="./locale">
+                        <items jcr:primaryType="nt:unstructured">
+                            <enUS
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/select/option"
+                                text="English (US)"
+                                value="English (US)"/>
+                            <enGB
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/select/option"
+                                text="English (UK)"
+                                value="English (UK)"/>
+                            <frFR
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/select/option"
+                                text="French (France)"
+                                value="French (France)"/>
+                            <deDE
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/select/option"
+                                text="German (Germany)"
+                                value="German (Germany)"/>
+                            <esES
+                                jcr:primaryType="nt:unstructured"
+                                sling:resourceType="granite/ui/components/coral/foundation/form/select/option"
+                                text="Spanish (Spain)"
+                                value="Spanish (Spain)"/>
+                        </items>
+                    </localeDropdown>
+                    <generateButton
+                        granite:class="translate-btn"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="/libs/granite/ui/components/coral/foundation/button"
+                        active="{Boolean}true"
+                        block="{Boolean}true"
+                        fieldLabel="Generatetranslate"
+                        id="generate-button-rajani"
+                        name="./generate"
+                        size="M"
+                        text="Generate"
+                        type="button"
+                        variant="primary"/>
+                    <translatedText
+                        granite:class="output-field"
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textarea"
+                        fieldLabel="Translated Text"
+                        name="./translatedText"
+                        useFixedInlineToolbar="{Boolean}true"/>
+                </items>
+            </column>
+        </items>
+    </content>
+</jcr:root>
