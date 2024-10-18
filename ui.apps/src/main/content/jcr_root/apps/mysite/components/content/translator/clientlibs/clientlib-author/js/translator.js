@@ -6,23 +6,21 @@
             let locale = $(".locale").val();
             let outputTextField = $(".output-field");
 
-            $.ajax({
-                url: '/bin/copilotIntegration',
+            fetch(`/bin/copilotIntegration?prompt=${encodeURIComponent(inputText)}&locale=${encodeURIComponent(locale)}`, {
                 method: 'GET',
-                data: { prompt: inputText, locale: locale }
             })
-            .done(function(response) {
-                // Assuming response is a JSON object with a 'message' field
-                try {
-                    const parsedResponse = JSON.parse(response);
-                    $(outputTextField).val(parsedResponse.message);
-                } catch (e) {
-                    console.error("Error parsing JSON: ", e);
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
                 }
-                alert('Success: ' + response);
+                return response.text(); // Or response.json() if the response is in JSON format
             })
-            .fail(function(response) {
-                alert('Error occurred!');
+            .then(data => {
+                $(outputTextField).val(data);
+                alert('Success: ' + data);
+            })
+            .catch(error => {
+                alert('Error occurred: ' + error.message);
             });
         });
     });

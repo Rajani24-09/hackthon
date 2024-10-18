@@ -41,7 +41,11 @@ public class AEMCopilotIntegrationServlet extends SlingSafeMethodsServlet {
        postRequest.setHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJpZCI6MjM3OTMsInJvbGVzIjpbImRlZmF1bHQiXSwicGF0aWQiOiIzNjIzYjc3Zi1hZTllLTRiYzEtOWY0NC04YzMyNmI0YTZlNTcifSwiaWF0IjoxNzI5MTAyNTU4LCJleHAiOjE3MzE2OTQ1NTh9.k3gln60yE5gAQ9eqUvuf2h1RdQHt271huwrSUAzPZAk");
        postRequest.setHeader("Content-Type", "application/json");
           //Translate 'Hello, how are you?' to French
-          String jsonPayload = "{\"message\":\"" +"Translate'" +userInput +"' to"+locale+ "\", \"options\": {\"model\": \"gpt35turbo\"}}";
+          String chatGptMsg = "Translate the following text into the locale "+locale+". Just respond with the corrected locale and nothing else. The data to convert is as follows:" + userInput;
+          String jsonPayload = "{"
+                  + "\"message\": \"" + chatGptMsg + "\", "
+                  + "\"options\": {\"model\": \"gpt35turbo\"}"
+                  + "}";
 
          postRequest.setEntity(new StringEntity(jsonPayload));
 
