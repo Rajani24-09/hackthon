@@ -1,5 +1,6 @@
 <sly data-sly-use.templates="core/wcm/components/commons/v1/templates.html"/>
-<sly data-sly-test.text="${properties.translatedText}">
+<div data-sly-use.translator="com.mysite.core.models.TranslatorComponentModel">
+<sly data-sly-test.text="${translator.translatedText}">
     <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html"
          data-sly-call="${clientlib.all @ categories='translator.component.dialog.clientlibs'}"/>
 
@@ -9,18 +10,18 @@
         <!-- Input text column -->
         <div class="column">
             <label for="inputText">Input Text:</label>
-            <textarea id="inputText" class="input-text" name="inputText" rows="4" cols="50">${properties.prompt}</textarea>
+            <textarea id="inputText" class="input-text" name="inputText" rows="4" cols="50">${translator.prompt}</textarea>
         </div>
 
         <!-- Translated text column -->
         <div class="column">
             <label for="outputText">Translated Text:</label>
-            <textarea id="outputText" class="output-text" name="outputText" rows="4" cols="50" readonly>${properties.translatedText}</textarea>
+            <textarea id="outputText" class="output-text" name="outputText" rows="4" cols="50" readonly>${translator.translatedText}</textarea>
 
             <!-- Language Information -->
             <div class="language-info">
                 <label for="translatedTo">Translated To:</label>
-                <span id="translatedTo" class="translated-language">${properties.locale}</span>
+                <span id="translatedTo" class="translated-language">${translator.locale}</span>
             </div>
         </div>
     </div>
