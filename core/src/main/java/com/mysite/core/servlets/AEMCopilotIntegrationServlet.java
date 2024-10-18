@@ -42,48 +42,52 @@ public class AEMCopilotIntegrationServlet extends SlingSafeMethodsServlet {
         this.apiKey = config.apiKey();
         this.apiUrl = config.apiUrl();
     }
-      @Override
-    protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException{
-          String userInput = request.getParameter("prompt");
-          String locale = request.getParameter("locale");
 
-       CloseableHttpClient httpClient = HttpClients.createDefault();
-       HttpPost postRequest = new HttpPost(apiUrl);
-       postRequest.setHeader("Authorization", "Bearer " + apiKey);
-       postRequest.setHeader("Content-Type", "application/json");
-          //Translate 'Hello, how are you?' to French
-          String jsonPayload = "{\"message\":\"" +"Translate'" +userInput +"' to"+locale+ "\", \"options\": {\"model\": \"gpt35turbo\"}}";
+    @Override
+    protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws ServletException, IOException {
+        String userInput = request.getParameter("prompt");
+        String locale = request.getParameter("locale");
 
-         postRequest.setEntity(new StringEntity(jsonPayload));
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpPost postRequest = new HttpPost(apiUrl);
+        postRequest.setHeader("Authorization", "Bearer " + apiKey);
+        postRequest.setHeader("Content-Type", "application/json");
 
-       // Execute the request and get the response
-       String apiResponse = EntityUtils.toString(httpClient.execute(postRequest).getEntity());
+        // Prepare the JSON payload for translation
 
-       // Parse the response as JSON
-       JsonObject jsonResponse = JsonParser.parseString(apiResponse).getAsJsonObject();
-       JsonArray messages = jsonResponse.getAsJsonObject("data").getAsJsonArray("messages");
+        String jsonPayload = "{\"message\":\"Translate '" + userInput + "' to " + locale +"else reply back 'null'"+ "\", \"options\": {\"model\": \"gpt35turbo\"}}";
+        postRequest.setEntity(new StringEntity(jsonPayload));
 
-       // Extract the assistant's message
-       String assistantResponse = null;
-       for (JsonElement message : messages) {
-           JsonObject messageObj = message.getAsJsonObject();
-           String role = messageObj.get("role").getAsString();
-           if ("assistant".equals(role)) {
-               assistantResponse = messageObj.get("content").getAsString();
-               break;  // We found the assistant's message, no need to continue
-           }
-       }
+        // Execute the request and get the response
+        String apiResponse = EntityUtils.toString(httpClient.execute(postRequest).getEntity());
 
-       // Write the assistant's message to the response
-       response.setContentType("application/json");
+        // Parse the response as JSON
+        JsonObject jsonResponse = JsonParser.parseString(apiResponse).getAsJsonObject();
+        JsonArray messages = jsonResponse.getAsJsonObject("data").getAsJsonArray("messages");
 
-       if (assistantResponse != null) {
-           assistantResponse = assistantResponse.replace("\"", "\\\"");
-           response.getWriter().write( assistantResponse.replace("\\\"","") );
-           response.setStatus(HttpServletResponse.SC_OK);
-       } else {
-           response.getWriter().write("{\"error\": \"No assistant response found\"}");
-           response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-       }
-   }
+        // Extract the assistant's message
+        String assistantResponse = null;
+        for (JsonElement message : messages) {
+            JsonObject messageObj = message.getAsJsonObject();
+            String role = messageObj.get("role").getAsString();
+            if ("assistant".equals(role)) {
+                assistantResponse = messageObj.get("content").getAsString();
+                break;  // We found the assistant's message, no need to continue
+            }
+        }
+
+        // Determine if the assistant's response is meaningful
+        if (!assistantResponse.equalsIgnoreCase("null")) {
+            // Write the assistant's message to the response
+            response.setContentType("application/json");
+            assistantResponse = assistantResponse.replace("\"", "\\\"");
+            response.getWriter().write(assistantResponse.replace("\\\"", "") );
+            response.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            // If no meaningful response, return 204 No Content
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        }
+    }
+
+
 }

@@ -11,6 +11,7 @@
             })
             .then(response => {
                 if (!response.ok) {
+                $(outputTextField).val('');
                     throw new Error('Network response was not ok');
                 }
                 return response.text(); // Or response.json() if the response is in JSON format
